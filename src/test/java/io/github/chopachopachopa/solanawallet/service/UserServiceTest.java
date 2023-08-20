@@ -11,9 +11,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -23,6 +25,9 @@ import static org.mockito.Mockito.when;
 class UserServiceTest extends AbstractTest {
     private static final String REG_USER_JSON = "reg_user.json";
     private static final String USER_ENTITY_JSON = "user_entity.json";
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @Mock
     private UserHelperService userHelperService;
@@ -60,23 +65,21 @@ class UserServiceTest extends AbstractTest {
     @Test
     void saveUser_whenTryRegister_thenThrowsException() {
         final String username = "username";
+
         final RegUser regUser = readRegUser();
-        final UserEntity userEntity = readObject(USER_ENTITY_JSON, UserEntity.class);
 
         when(userHelperService.existsByUsername(username))
             .thenReturn(true);
 
-
         assertThatThrownBy(() -> sut.saveUser(regUser))
             .isInstanceOf(CommonException.class);
-
 
         verify(userHelperService, times(1))
             .existsByUsername(username);
         verify(userHelperService, never())
-            .save(userEntity);
+            .save(any());
         verify(userMapper, never())
-            .toEntity(regUser);
+            .toEntity(any());
     }
 
     @Override
