@@ -18,7 +18,6 @@ import org.p2p.solanaj.programs.SystemProgram;
 import org.p2p.solanaj.rpc.RpcApi;
 import org.p2p.solanaj.rpc.RpcClient;
 import org.p2p.solanaj.rpc.RpcException;
-import org.p2p.solanaj.rpc.types.ConfirmedTransaction;
 import org.p2p.solanaj.rpc.types.SignatureInformation;
 import org.p2p.solanaj.rpc.types.config.Commitment;
 import org.springframework.stereotype.Service;

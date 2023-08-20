@@ -1,8 +1,5 @@
 package io.github.chopachopachopa.solanawallet.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 public record RestResponse<T>(
     Status status,
     T data,
