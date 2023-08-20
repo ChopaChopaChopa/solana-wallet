@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SolConverter {
-    private static int LAMPORTS_IN_COIN = 100000000;
+    private static final int LAMPORTS_IN_COIN = 100000000;
 
     public static BigDecimal toSol(final long lamports) {
         return BigDecimal.valueOf(lamports).divide(BigDecimal.valueOf(LAMPORTS_IN_COIN));

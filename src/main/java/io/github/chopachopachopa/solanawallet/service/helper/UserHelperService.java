@@ -5,8 +5,7 @@ import io.github.chopachopachopa.solanawallet.exception.CommonException;
 import io.github.chopachopachopa.solanawallet.exception.ErrorCode;
 import io.github.chopachopachopa.solanawallet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.bitcoinj.core.Base58;
-import org.p2p.solanaj.core.PublicKey;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +16,12 @@ public class UserHelperService {
     public UserEntity findByUsername(final String username) {
         return repository.findByUsername(username)
             .orElseThrow(() -> new CommonException(ErrorCode.USER_NOT_FOUND));
+    }
+
+    public UserEntity findUser() {
+        return findByUsername(
+            SecurityContextHolder.getContext().getAuthentication().getName()
+        );
     }
 
     public boolean existsByUsername(String username) {
