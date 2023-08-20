@@ -12,7 +12,9 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "pk", ignore = true)
     @Mapping(target = "address", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     UserEntity toEntity(RegUser model);
     RegUser toReqModel(RegUserDto dto);
+    @Mapping(target = "publicKey", source = "pk")
     User toModel(UserEntity entity);
 }
