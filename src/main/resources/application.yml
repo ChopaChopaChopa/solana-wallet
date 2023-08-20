@@ -1,0 +1,27 @@
+spring:
+  security:
+    user:
+      name: people
+  main:
+    banner-mode: off
+  datasource:
+    url: 'jdbc:postgresql://91.185.84.87:5432/postgres'
+    username: user
+    password: cah9suiChaeho7uo
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 9000
+
+feign:
+  client:
+    config:
+      coingecko:
+        logger-level: full
+        url: https://api.coingecko.com/api/v3/
+
